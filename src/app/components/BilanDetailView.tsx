@@ -9,7 +9,6 @@ import {
   Check,
   Download,
   Eye,
-  EyeOff,
   Trash2,
   Plus,
   Loader2,
@@ -121,7 +120,6 @@ export function BilanDetailView() {
   console.log('BilanDetailView monté avec clientId:', clientId, 'bilanId:', bilanId);
   
   // Fallback: Si pas d'ID, utiliser des valeurs par défaut
-  const safeClientId = clientId || '1';
   const safeBilanId = bilanId || '1';
   
   const [isOnline, setIsOnline] = useState(true); // Renommé de isPublished à isOnline

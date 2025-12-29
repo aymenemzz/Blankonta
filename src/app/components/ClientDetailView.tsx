@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Edit, Mail, Building2, Upload, Eye, Share2, FileText } from 'lucide-react';
+import { ArrowLeft, Edit, Mail, Upload, Eye, Share2, FileText } from 'lucide-react';
 import { ClientFormModal, ClientFormData } from './ClientFormModal';
 import { ImportConfigModal, AnalysisConfig, Client } from './ImportConfigModal';
 
@@ -172,16 +172,16 @@ export function ClientDetailView() {
   };
 
   // Handler pour le partage (stoppe la propagation)
-  const handleShareBilan = (e: React.MouseEvent, bilanId: string) => {
+  const handleShareBilan = (e: React.MouseEvent, _bilanId: string) => {
     e.stopPropagation();
     alert('Fonctionnalité de partage à implémenter');
   };
 
   // Convertir ClientFormData en Client pour ImportConfigModal
   const clientForImport: Client = {
-    id: client.id,
-    companyName: client.companyName,
-    siret: client.siret,
+    id: client.id || '',
+    companyName: client.companyName || '',
+    siret: client.siret || '',
     authorizedEmails: client.authorizedEmails,
   };
 
