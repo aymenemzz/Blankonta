@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- MODELES ---
+
+model Client {
+  id               String   @id @default(uuid())
+  companyName      String
+  siret            String   @unique
+  accountant       String?  @default("Jean Dupont (Moi)")
+  status           String   @default("active")
+  createdAt        DateTime @default(now())
+
+  authorizedEmails AuthorizedEmail[]
+
+  bilans           Bilan[]
+}
+
+model AuthorizedEmail {
+  id      String   @id @default(uuid())
+  email   String   @unique
+
+  clients Client[]
+
+  bilans  Bilan[]
+}
+
+model Bilan {
+  id                 String   @id @default(uuid())
+  name               String
+  period             String
+  status             String   @default("Draft")
+  importDate         DateTime @default(now())
+
+  // Fichiers
+  fileName           String?
+  fileUrl            String?
+
+  authorizedEmails   AuthorizedEmail[]
+
+  clientId           String
+  client             Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
