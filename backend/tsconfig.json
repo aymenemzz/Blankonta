@@ -1,44 +1,27 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
+    /* --- Configuration de base pour Node/Express --- */
+    "target": "es2016",             // Version de JS générée
+    "module": "commonjs",           // Le standard pour Node.js
+    "moduleResolution": "node",     // INDISPENSABLE pour qu'il trouve tes dossiers node_modules
+
+    /* --- Chemins (à ajuster si tes fichiers ne sont pas dans src) --- */
     // "rootDir": "./src",
     // "outDir": "./dist",
 
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
-    "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
+    /* --- Interopérabilité --- */
+    "esModuleInterop": true,        // Permet les imports simples (import express from 'express')
+    "allowSyntheticDefaultImports": true,
 
-    // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
+    /* --- Strictness (Gardons ça propre mais sans excès) --- */
     "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
-  }
+    "skipLibCheck": true,           // Ignore les erreurs dans les fichiers de définition des autres
+    "forceConsistentCasingInFileNames": true,
+
+    /* --- IMPORTANT : On supprime la ligne "types": [] --- */
+    // En ne mettant rien ici, TypeScript va charger AUTOMATIQUEMENT
+    // tous les types présents dans node_modules/@types (express, cors, node...)
+  },
+  "include": ["src/**/*"],          // Assure-toi que cela pointe vers ton code
+  "exclude": ["node_modules"]
 }
