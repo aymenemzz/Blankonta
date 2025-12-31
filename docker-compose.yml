@@ -1,16 +1,40 @@
 version: '3.8'
+
 services:
+  # --- BACKEND ---
+  backend:
+    build:
+      context: Backend      # <--- Important : on pointe vers le dossier Backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./Backend/src:/app/src # <--- Si tu veux le hot-reload, le chemin change aussi
+    env_file:
+      - Backend/.env         # <--- On va chercher le .env DANS le dossier Backend
+    depends_on:
+      - postgres
+
+  # --- BASE DE DONNÉES (Rien ne change ici) ---
   postgres:
-    image: postgres:15-alpine
-    container_name: blankonta_db
+    image: postgres:15
     environment:
-      POSTGRES_USER: admin
+      POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: blankonta
+      POSTGRES_DB: mydatabase
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  # --- PGADMIN (Optionnel, rien ne change) ---
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
 
 volumes:
   postgres_data:

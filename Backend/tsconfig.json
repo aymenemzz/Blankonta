@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",           // <--- On précise que le code est là
+    "outDir": "./dist",
+    "target": "es2016",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],        // <--- On ne compile que ce qu'il y a dans src
+  "exclude": ["node_modules", "dist"]
+}
