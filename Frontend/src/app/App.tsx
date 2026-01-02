@@ -31,7 +31,6 @@ export default function App() {
           <Route path="/client/:clientId/bilan/:bilanId" element={<BilanDetailView />} />
           <Route path="/clients" element={<ClientsPage />} />
           <Route path="/clients/:id" element={<ClientDetailView />} />
-          <Route path="/documents" element={<DashboardHome />} />
           <Route path="/settings" element={<DashboardHome />} />
         </Routes>
       </DashboardLayout>
